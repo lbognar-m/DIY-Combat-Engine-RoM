@@ -1,2 +1,2 @@
-# DIY-Combat-Engine-RoM
+# DIY-Combat-Engine-Bot
 Combat bot for Runes of Magic

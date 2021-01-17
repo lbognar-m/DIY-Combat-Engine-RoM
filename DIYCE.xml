@@ -1,0 +1,593 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/..\..\WorldXML\UI.xsd">
+
+
+	<Button name="DIYCEMiniButton" inherits="UIPanelButtonTemplate" parent="AddonManagerMiniFrame">
+		<Size>
+			<AbsDimension y="24" x="24" />
+		</Size>
+		<Scripts>
+			<OnClick>
+				AddonManager.MiniButton_OnClick(this)
+			</OnClick>
+			<OnEnter>
+				AddonManager.MiniButton_OnEnter(this)
+			</OnEnter>
+			<OnLeave>
+				AddonManager.MiniButton_OnLeave(this)
+			</OnLeave>
+		</Scripts>
+		<NormalTexture file="Interface\ItemMall\IM_Help-Normal">
+			<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+		</NormalTexture>
+		<PushedTexture file="Interface\ItemMall\IM_Help-pushed">
+			<TexCoords left="0" right="0.6875" top="0" bottom="0.6875"/>
+		</PushedTexture>
+		<HighlightTexture file="Interface\Buttons\PanelSmallButtonHighlight" alphaMode="ADD" />
+	</Button>
+
+	<CheckButton name="TooltipIdsCheckboxTemplate" inherits="CommonOptionsCheckButtonTemplate" virtual="true">
+		<Size><AbsDimension x="25" y="25" /></Size>
+		<Scripts>
+			<OnClick>
+				TooltipIds:Checkbox_OnClick(this)
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	
+	
+	<Frame name="DIYCEFrame" parent="UIParent" inherits="UICommonFrameTemplate" movable="true" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="260" y="300"/>
+		</Size>
+		<Backdrop bgFile="Interface\worldmap\worldmap-bg" edgeFile="Interface\worldmap\worldmap-border" tile="true">
+			<BackgroundInsets>
+				<AbsInset top="4" left="4" bottom="4" right="4"/>
+			</BackgroundInsets>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<FontString name="MyAddon_MainFrame_Title" inherits="GameTitleFont" text="Config DIYCE">
+					<Anchors>
+						<Anchor point="TOP" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="8"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		
+		<Frames>
+				<EditBox name="partyLeader" letters="16" visible="True" inherits="UIPanelEditBoxTemplate">
+					<Size>
+						<AbsDimension x="100" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="25" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetText(DIYCEVars["PartyLeader"])
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Main party tank (if empty, it will return party1)", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+					<TextInsets>
+						<AbsInset left="6" right="6" top="8" bottom="6"/>
+					</TextInsets>
+				</EditBox>
+				<EditBox name="PetSlot" letters="1" visible="True" inherits="UIPanelEditBoxTemplate">
+					<Size>
+						<AbsDimension x="40" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="135" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetText(DIYCEVars["PetSlot"])
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Pet Egg Slot (1-6)", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+					<TextInsets>
+						<AbsInset left="6" right="6" top="8" bottom="6"/>
+					</TextInsets>
+				</EditBox>
+				<EditBox name="CDready" letters="3" visible="True" inherits="UIPanelEditBoxTemplate">
+					<Size>
+						<AbsDimension x="40" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="195" y="25"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetText(DIYCEVars["CDready"])
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Remaining GCD when skill is castable. Default is 0.3", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+					<TextInsets>
+						<AbsInset left="6" right="6" top="8" bottom="6"/>
+					</TextInsets>
+				</EditBox>
+				
+				<Button name="ShowHotKeys" inherits="UIPanelButtonTemplate" text="Show hotkeys">
+					<Size>
+						<AbsDimension x="105" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="25" y="60"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnClick>
+							DIYCE.ShowHotKeys()
+						</OnClick>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Show hotkeys", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+				</Button>
+				<Button name="HideHotKeys" inherits="UIPanelButtonTemplate" text="Hide hotkeys">
+					<Size>
+						<AbsDimension x="105" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="135" y="60"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnClick>
+							DIYCE.HideHotKeys()
+						</OnClick>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Hide hotkeys", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+				</Button>
+				
+				<Button name="PetButton" inherits="UIPanelButtonTemplate" text="Pet">
+					<Size>
+						<AbsDimension x="50" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="25" y="90"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnClick>
+							DIYCE.Pet()
+						</OnClick>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Summon/Recall Pet. Macro: /script DIYCE.Pet()", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+				</Button>
+				<Button name="DieButton" inherits="UIPanelButtonTemplate" text="Suicide">
+					<Size>
+						<AbsDimension x="50" y="20"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="80" y="90"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnClick>
+							DIYCE.Death()
+						</OnClick>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Kill Yourself. Scroll to cancel. Macro: /script DIYCE.Death()", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+				</Button>
+				
+				<CheckButton name="useBossBuffs" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="115" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="BossBuffs">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["useBossBuffs"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["useBossBuffs"] = not DIYCEVars["useBossBuffs"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Use Boss Buffs", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				<CheckButton name="useLongBuffs" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="130" y="115" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="LongBuffs">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["useLongBuffs"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["useLongBuffs"] = not DIYCEVars["useLongBuffs"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Use Long Buffs", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				
+				<CheckButton name="useBossPots" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="145" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="BossPots">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["useBossPots"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["useBossPots"] = not DIYCEVars["useBossPots"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Use Boss Buff Potions and Foods", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				<CheckButton name="useLongPots" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="130" y="145" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="LongPots">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["useLongPots"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["useLongPots"] = not DIYCEVars["useLongPots"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Use Long Buff Potions and Foods", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				
+				<CheckButton name="modePvP" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="175" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="PvP">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["modePvP"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["modePvP"] = not DIYCEVars["modePvP"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("PvP mode", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				<CheckButton name="targetBossOnly" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="130" y="175" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="BossOnly">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["targetBossOnly"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["targetBossOnly"] = not DIYCEVars["targetBossOnly"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Target Boss Only", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				
+				<CheckButton name="debugCount" inherits="UIPanelCheckButtonTemplate" checked="true" >
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="20" y="205" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+						<Layers>
+							<Layer level="ARTWORK">
+								<FontString name="theCheckBox" inherits="GameEditFont" text="DebugCount">
+									<Anchors>
+										<Anchor point="LEFT" relativePoint="RIGHT">
+										</Anchor>
+									</Anchors>
+								</FontString>
+							</Layer>
+						</Layers>
+
+						<Scripts>
+							<OnLoad>
+								this:SetChecked(DIYCEVars["debugCount"])
+							</OnLoad>
+							<OnClick>
+								 DIYCEVars["debugCount"] = not DIYCEVars["debugCount"]
+							</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+								GameTooltip:ClearLines() <!-- Clear tooltip -->
+								GameTooltip:AddLine("Debug Counter", 0, 0.75, 0.75)
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+								GameTooltip:Hide()
+							</OnLeave>
+						</Scripts>
+				</CheckButton>
+				<EditBox name="TimerSkill" letters="2" visible="True" inherits="UIPanelEditBoxTemplate">
+					<Size>
+						<AbsDimension x="30" y="30"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="DIYCEFrame" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="130" y="205"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnLoad>
+							this:SetText(DIYCEVars["TimerSkill"])
+						</OnLoad>
+						<OnEnter>
+							GameTooltip:SetOwner(this, "ANCHOR_LEFT", 0, 0) <!-- Set Owner -->
+							GameTooltip:ClearLines() <!-- Clear tooltip -->
+							GameTooltip:AddLine("Debug Timer skill Action bar slot number: preferably one with long CD. ALso, cast it before beginning log.", 0, 0.75, 0.75)
+							GameTooltip:Show()
+						</OnEnter>
+						<OnLeave>
+							GameTooltip:Hide()
+						</OnLeave>
+					</Scripts>
+					<TextInsets>
+						<AbsInset left="6" right="6" top="8" bottom="6"/>
+					</TextInsets>
+				</EditBox>
+
+				<Button name="savePartyLeader" inherits="UIPanelButtonTemplate" text="Save Settings">
+					<Size>
+						<AbsDimension x="150" y="25"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="DIYCEFrame" relativePoint="BOTTOMRIGHT">
+							<Offset>
+								<AbsDimension x="5" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<Scripts>
+						<OnClick>
+							DIYCEVars["PartyLeader"] = partyLeader:GetText()
+							DIYCEVars["PetSlot"] = PetSlot:GetText()
+							DIYCEVars["CDready"] = CDready:GetText()
+							DIYCEVars["TimerSkill"] = TimerSkill:GetText()
+							DIYCE.SaveSettings(DIYCEVars)
+						</OnClick>
+					</Scripts>
+				</Button>
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				DIYCE.OnLoad(this)
+			</OnLoad>
+			<OnEvent>
+				DIYCE[event]()
+			</OnEvent>
+		</Scripts>
+	</Frame>
+</Ui>
