@@ -1,7 +1,7 @@
 -- Title: DIY Combat Engine
 -- Version: 2.4.2
 -- Description: Combat Engine to help with skill rotations, and maintaining buffs/debuffs for maximizing DPS.
--- Author: MisterSippi
+-- Author: MisterSippi 
 
 local WHITE = "|cffffffff"
 local SILVER = "|cffc0c0c0"
