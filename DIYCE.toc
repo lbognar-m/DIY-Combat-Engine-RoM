@@ -1,0 +1,11 @@
+## Title: DIY Combat Engine
+## Version: 2.3.1
+## Description: Combat Engine to help with skill rotations, and maintaining buffs/debuffs for maximizing DPS.
+## Author: MisterSippi
+
+DIYCE.lua
+DIYCE.xml
+HelperFunctions.lua
+UIfunctions.lua
+CustomFunctions.lua
+KillSequence.lua
